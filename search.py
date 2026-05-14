@@ -138,3 +138,31 @@ def astar_solve(game):
 
     # (To be continued in next commits)
     return None  # temporary
+    # ---------- 3. Safe dead cells (only corners) ----------
+    dead_cells = set()
+    for y in range(height):
+        for x in range(width):
+            if (x, y) in walls or (x, y) in targets:
+                continue
+            up = (x, y-1) in walls
+            down = (x, y+1) in walls
+            left = (x-1, y) in walls
+            right = (x+1, y) in walls
+            if (up and left) or (up and right) or (down and left) or (down and right):
+                dead_cells.add((x, y))
+
+    # ---------- 4. Heuristic (admissible) ----------
+    def heuristic(state):
+        total = 0
+        for bx, by in state.get_boxes():
+            pd = push_dist[by][bx]
+            if pd >= INF:
+                pd = 10000
+            md = move_dist[by][bx]
+            if md >= INF:
+                md = 10000
+            total += pd * PUSH_COST + md * MOVE_COST
+        return total
+
+    # (Search loop will be added next)
+    return None
