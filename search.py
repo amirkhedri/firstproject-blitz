@@ -50,6 +50,7 @@ def ids_solve(game):
         if result is not None:
             return result
     return None
+
 # -------------------------------------------------------------------
 # 3. UCS – Uniform Cost Search (minimizes total cost)
 # -------------------------------------------------------------------
@@ -82,3 +83,58 @@ def ucs_solve(game):
                 counter += 1
                 heapq.heappush(frontier, (new_cost, counter, next_state, actions + [action]))
     return None
+# -------------------------------------------------------------------
+# 4. A* – Optimized with push‑distance + move‑distance heuristic
+#    and safe corner deadlock pruning.
+# -------------------------------------------------------------------
+def astar_solve(game):
+    from collections import deque
+    import heapq
+
+    height = game.get_grid_height()
+    width = game.get_grid_width()
+    walls = game.get_walls()
+    targets = game.get_targets()
+    INF = 10**9
+
+    # ---------- 1. Minimum pushes to any target ----------
+    push_dist = [[INF] * width for _ in range(height)]
+    q = deque()
+    for (tx, ty) in targets:
+        if (tx, ty) not in walls:
+            push_dist[ty][tx] = 0
+            q.append((tx, ty))
+
+    dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    while q:
+        x, y = q.popleft()
+        d = push_dist[y][x]
+        for dx, dy in dirs:
+            px, py = x - dx, y - dy          # box before push
+            player_x, player_y = x + dx, y + dy
+            if not (0 <= px < width and 0 <= py < height): continue
+            if not (0 <= player_x < width and 0 <= player_y < height): continue
+            if (px, py) in walls or (player_x, player_y) in walls: continue
+            if push_dist[py][px] > d + 1:
+                push_dist[py][px] = d + 1
+                q.append((px, py))
+
+    # ---------- 2. Minimum move distance (ignoring boxes) ----------
+    move_dist = [[INF] * width for _ in range(height)]
+    q = deque()
+    for (tx, ty) in targets:
+        if (tx, ty) not in walls:
+            move_dist[ty][tx] = 0
+            q.append((tx, ty))
+    while q:
+        x, y = q.popleft()
+        d = move_dist[y][x]
+        for dx, dy in dirs:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < width and 0 <= ny < height and (nx, ny) not in walls:
+                if move_dist[ny][nx] > d + 1:
+                    move_dist[ny][nx] = d + 1
+                    q.append((nx, ny))
+
+    # (To be continued in next commits)
+    return None  # temporary
