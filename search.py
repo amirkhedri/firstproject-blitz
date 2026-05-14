@@ -50,3 +50,35 @@ def ids_solve(game):
         if result is not None:
             return result
     return None
+# -------------------------------------------------------------------
+# 3. UCS – Uniform Cost Search (minimizes total cost)
+# -------------------------------------------------------------------
+def ucs_solve(game):
+    start_state = game.get_initial_state()
+    if game.is_goal(start_state):
+        return []
+
+    frontier = []                     # (cost, tie_breaker, state, actions)
+    counter = 0
+    heapq.heappush(frontier, (0, counter, start_state, []))
+    best_cost = {start_state: 0}
+    visited = set()                   # closed set
+
+    while frontier:
+        cost, _, state, actions = heapq.heappop(frontier)
+        if state in visited:
+            continue
+        if best_cost.get(state, float('inf')) < cost:
+            continue
+        if game.is_goal(state):
+            return actions
+
+        visited.add(state)
+
+        for action, next_state, step_cost in game.get_successors(state):
+            new_cost = cost + step_cost
+            if new_cost < best_cost.get(next_state, float('inf')):
+                best_cost[next_state] = new_cost
+                counter += 1
+                heapq.heappush(frontier, (new_cost, counter, next_state, actions + [action]))
+    return None
