@@ -57,4 +57,12 @@ By developing this solver, the following core AI concepts were achieved:
    ```bash
    git clone [https://github.com/amirkhedri/sokoban-ai-solver.git](https://github.com/amirkhedri/sokoban-ai-solver.git)
    cd sokoban-ai-solver
-   
+   Install the required dependencies:
+
+ ```bash
+pip install pygame
+Run the solver:
+
+ ```bash
+python main.py
+(Note: Replace main.py with your actual execution script if it differs).
