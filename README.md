@@ -84,6 +84,5 @@ This project was developed for the **Fundamentals and Applications of Artificial
 * **University:** Faculty of Computer Engineering, University of Isfahan
 * **Semester:** Spring 2026 (1404-1405)
 
-* **Author:** Amirmohammad Khedri
 
 
