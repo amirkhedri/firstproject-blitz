@@ -56,7 +56,7 @@ By developing this solver, the following core AI concepts were achieved:
 1. Clone this repository:
    ```bash
    git clone [https://github.com/amirkhedri/sokoban-ai-solver.git]
-   cd sokoban-ai-solver
+   
 
 ```
 
