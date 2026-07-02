@@ -55,7 +55,7 @@ By developing this solver, the following core AI concepts were achieved:
 ### Quick Start
 1. Clone this repository:
    ```bash
-   git clone https://github.com/amirkhedri/sokoban-ai-solver.git
+   git clone https://github.com/amirkhedri/Heuristic-Sokoban-Solver.git
    
 
 ```
