@@ -59,10 +59,38 @@ By developing this solver, the following core AI concepts were achieved:
    cd sokoban-ai-solver
    Install the required dependencies:
 
- ```bash
-pip install pygame
-Run the solver:
+```markdown
+## ⚙️ Requirements & Installation
 
- ```bash
+### Tech Stack
+* **Python 3.x**
+* **Pygame** (Used for dynamic visual rendering of the search process and solution playback)
+
+### Quick Start
+1. Clone this repository:
+   ```bash
+   git clone [https://github.com/amirkhedri/sokoban-ai-solver.git](https://github.com/amirkhedri/sokoban-ai-solver.git)
+   cd sokoban-ai-solver
+
+```
+
+2. Install the required dependencies:
+```bash
+pip install pygame
+
+```
+
+
+3. Run the solver:
+```bash
 python main.py
-(Note: Replace main.py with your actual execution script if it differs).
+
+```
+
+
+
+*(Note: Replace `main.py` with your actual execution script if it differs).*
+
+```
+
+```
